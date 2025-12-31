@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contares Lista</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2c3e50">
+
+
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Contares Lista</h1>
+  <p class="lead">Selecciona, agrega y guarda automáticamente.</p>
+
+  <button class="secondary" onclick="location.href='index.html'">⬅ Volver al menú</button>
+
+  <ul id="myList" class="list"></ul>
+
+  <input type="text" id="newItem" placeholder="Nuevo elemento…">
+  <button id="addItem">Agregar</button>
+
+  <button id="toggleMissing">Mostrar faltantes</button>
+  <button id="clearSelections">Borrar selecciones</button>
+  <button id="resetList" class="secondary">Resetear lista</button>
+
+  <div id="missingPanel"></div>
+</div>
+
+<script>
+const STORAGE_KEY = 'listaItems1';
+
+const defaultItems = [
+  "Altavoz 1","Pie Altavoz 1","Cable alimentación altavoz 1","Cable mesa Altavoz 1",
+  "Altavoz 2","Pie Altavoz 2","Cable alimentación altavoz 2","Cable mesa Altavoz 2",
+  "Altavoz 3","Pie Altavoz 3","Cable alimentación altavoz 3","Cable mesa Altavoz 3",
+  "Ordenador","Cargador ordenador","Ratón ordenador","Proyector","Cable alimentación proyector","Cable HDMI proyector","Pie proyector","Pantalla proyector",
+  "Saxo alto","Saxo soprano","Micro saxo inalámbrico","Petaca micro","Pilas petaca","Receptor micro inalámbrico","Alimentador receptor micro","Cable receptor-mesa",
+  "Voice live","Alimentador voice","Cable mesa-voice",
+  "Piano","Pedal piano","Alimentador piano","Pie piano","Cable piano-mesa",
+  "Minimesa","Alimentador minimesa","Micro Shure","Cable micro Shure","Pie micro",
+  "Mesa de mezclas","Cables mesa","Pie de mesa","Cables extra","Micro de diadema",
+  "Receptor bluetooth","Alimentador receptor bluetooth","Cable receptor bluetooth-mesa"
+].map(label => ({ label, selected:false }));
+
+let items = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [...defaultItems];
+
+const list = document.getElementById("myList");
+const input = document.getElementById("newItem");
+const missingPanel = document.getElementById("missingPanel");
+
+function save(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+  updateMissingPanel();
+}
+
+function render(){
+  list.innerHTML="";
+  items.forEach(item=>{
+    const li=document.createElement("li");
+    li.className="item";
+    li.innerHTML=`
+      <span class="checkbox ${item.selected?'checked':''}">
+        ${item.selected?'✓':''}
+      </span>
+      <span class="label">${item.label}</span>
+    `;
+    li.onclick=()=>{
+      item.selected=!item.selected;
+      save(); render();
+    };
+    list.appendChild(li);
+  });
+  updateMissingPanel();
+}
+
+function updateMissingPanel(){
+  if(missingPanel.style.display==="block"){
+    const missing=items.filter(i=>!i.selected);
+    missingPanel.innerHTML = missing.length
+      ? "<strong>Faltan por seleccionar:</strong><ul>"+missing.map(m=>`<li>${m.label}</li>`).join("")+"</ul>"
+      : "<strong>Todos los elementos están seleccionados ✅</strong>";
+  }
+}
+
+document.getElementById("toggleMissing").onclick=()=>{
+  missingPanel.style.display =
+    missingPanel.style.display==="block" ? "none" : "block";
+  updateMissingPanel();
+};
+
+document.getElementById("clearSelections").onclick=()=>{
+  items.forEach(i=>i.selected=false);
+  save(); render();
+};
+
+document.getElementById("resetList").onclick=()=>{
+  items=[...defaultItems];
+  save(); render();
+};
+
+document.getElementById("addItem").onclick=()=>{
+  if(!input.value.trim()) return;
+  items.push({ label:input.value.trim(), selected:false });
+  input.value="";
+  save(); render();
+};
+
+input.onkeydown=e=>{ if(e.key==="Enter") document.getElementById("addItem").click(); };
+
+render();
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lista de compra</title>
+
+<link rel="stylesheet" href="styles.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2c3e50">
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Lista de compra</h1>
+
+  <button class="secondary" onclick="location.href='index.html'">⬅ Volver al menú</button>
+
+  <ul id="myList" class="list"></ul>
+
+  <input type="text" id="newItem" placeholder="Nuevo producto…">
+  <button id="addItem">Agregar</button>
+
+  <button id="toggleMissing">Mostrar faltantes</button>
+  <button id="clearSelections">Borrar selecciones</button>
+  <button id="resetList" class="secondary">Resetear lista</button>
+
+  <div id="missingPanel"></div>
+</div>
+
+<script>
+const STORAGE_KEY="listaCompra";
+let items = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+items = items.map(i => ({
+  label: i.label || i.value || "Elemento",
+  selected: !!i.selected
+}));
+
+const save = () => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+  updateMissingPanel();
+};
+
+const list=document.getElementById("myList");
+const addBtn=document.getElementById("addItem");
+const input=document.getElementById("newItem");
+const clearBtn=document.getElementById("clearSelections");
+const resetBtn=document.getElementById("resetList");
+const toggleMissingBtn=document.getElementById("toggleMissing");
+const missingPanel=document.getElementById("missingPanel");
+
+function render(){
+ list.innerHTML="";
+ items.forEach(item=>{
+  const li=document.createElement("li");
+  li.className="item";
+  li.innerHTML=`
+    <span class="checkbox ${item.selected?'checked':''}">
+      ${item.selected?'✓':''}
+    </span>
+    <span class="label">${item.label}</span>
+  `;
+  li.onclick=()=>{
+    item.selected=!item.selected;
+    save(); render();
+  };
+  list.appendChild(li);
+ });
+ updateMissingPanel();
+}
+
+function updateMissingPanel(){
+  if (missingPanel.style.display === "block") {
+    const missing = items.filter(i => !i.selected);
+    missingPanel.innerHTML = missing.length
+      ? "<strong>Faltan por comprar:</strong><ul>" + missing.map(m => `<li>${m.label}</li>`).join("") + "</ul>"
+      : "<strong>Todo está comprado ✅</strong>";
+  }
+}
+
+toggleMissingBtn.onclick=()=>{
+  missingPanel.style.display =
+    missingPanel.style.display==="block"?"none":"block";
+  updateMissingPanel();
+};
+
+clearBtn.onclick=()=>{items.forEach(i=>i.selected=false);save();render();};
+
+resetBtn.onclick=()=>{
+  localStorage.removeItem(STORAGE_KEY);
+  items=[];render();
+};
+
+addBtn.onclick=()=>{
+ if(!input.value.trim())return;
+ items.push({ label:input.value.trim(), selected:false });
+ input.value=""; save(); render();
+};
+
+input.onkeydown=e=>{if(e.key==="Enter")addBtn.click();};
+
+render();
+</script>
+
+</body>
+</html>

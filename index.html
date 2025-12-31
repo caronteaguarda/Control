@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Menú Principal</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2c3e50">
+
+</head>
+
+<body>
+
+<div class="menu">
+  <h1>Menú Principal</h1>
+
+  <button onclick="location.href='lista.html'">Lista compra</button>
+
+  <button class="secondary" onclick="location.href='pagina1.html'">Contares</button>
+
+  <button class="third" onclick="location.href='salidas.html'">Salidas</button>
+
+  <button class="fourth" onclick="location.href='tension.html'">Tensión</button>
+</div>
+  <button class="fourth" onclick="location.href='tension.html'">Tensión</button>
+</div>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+    .then(() => console.log('Service Worker registrado correctamente'))
+    .catch(err => console.error('Error al registrar el SW:', err));
+}
+</script>
+
+</body>
+</html>
+
+</body>
+</html>
