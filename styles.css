@@ -81,7 +81,7 @@ ul.list{
   margin:16px 0;
   display:grid;
   gap:20px;        /* ⬅ más separación */
-  font-size:26px;  /* ⬅ TODO más grande */
+  font-size:40px;  /* ⬅ TODO más grande */
 }
 
 li.item{
@@ -129,4 +129,5 @@ li.item{
   background:#f8fafc;
   border:1px solid #e5e7eb;
   display:none;
+
 }
