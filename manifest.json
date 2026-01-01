@@ -1,6 +1,6 @@
 {
-  "name": "Menú Principal",
-  "short_name": "Menú",
+  "name": "Control Casa",
+  "short_name": "Control Casa",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -19,3 +19,4 @@
     }
   ]
 }
+
