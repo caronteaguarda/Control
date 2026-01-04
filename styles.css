@@ -42,10 +42,10 @@ p{
 /* INPUTS */
 input, select{
   width:80%;        // ancho del cuadro (100% = ocupa todo el ancho)
-  padding:40px;      // espacio interior → hace el cuadro más alto y cómodo
+  padding:80px;      // espacio interior → hace el cuadro más alto y cómodo
   min-height:72px;   // altura mínima del cuadro, evita que se vea pequeño
-  font-size:30px;    // tamaño del texto que escribes dentro
-  line-height:1.4;   // espacio vertical del texto (más aire, más legible)
+  font-size:40px;    // tamaño del texto que escribes dentro
+  line-height:2;   // espacio vertical del texto (más aire, más legible)
   border-radius:14px;// redondeo de las esquinas
   border:2px solid #d1d5db; // grosor y color del borde
 }
@@ -125,6 +125,7 @@ li.item{
   display:none;
 
 }
+
 
 
 
