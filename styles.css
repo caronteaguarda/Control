@@ -43,7 +43,12 @@ input, select, button{
   appearance: none;
 }
 /* INPUTS */
-
+label{
+  display:block;
+  margin-top:24px;
+  font-size:40px;
+  font-weight:600;
+}
 input, select{
   width:100%;                 /* ancho del cuadro */
   padding:80px;               /* altura del cuadro */
@@ -129,6 +134,7 @@ li.item{
   display:none;
 
 }
+
 
 
 
