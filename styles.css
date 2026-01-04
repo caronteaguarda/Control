@@ -41,7 +41,7 @@ p{
 
 /* INPUTS */
 input, select{
-  width:100%;        // ancho del cuadro (100% = ocupa todo el ancho)
+  width:80%;        // ancho del cuadro (100% = ocupa todo el ancho)
   padding:40px;      // espacio interior → hace el cuadro más alto y cómodo
   min-height:72px;   // altura mínima del cuadro, evita que se vea pequeño
   font-size:30px;    // tamaño del texto que escribes dentro
@@ -125,6 +125,7 @@ li.item{
   display:none;
 
 }
+
 
 
 
