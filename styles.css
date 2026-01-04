@@ -38,16 +38,20 @@ p{
   font-size:18px;
   color:#475569;
 }
-
+input, select, button{
+  -webkit-appearance: none;
+  appearance: none;
+}
 /* INPUTS */
+
 input, select{
-  width:100%;        // ancho del cuadro (100% = ocupa todo el ancho)
-  padding:80px;      // espacio interior → hace el cuadro más alto y cómodo
-  min-height:72px;   // altura mínima del cuadro, evita que se vea pequeño
-  font-size:40px;    // tamaño del texto que escribes dentro
-  line-height:2;   // espacio vertical del texto (más aire, más legible)
-  border-radius:14px;// redondeo de las esquinas
-  border:2px solid #d1d5db; // grosor y color del borde
+  width:100%;                 /* ancho del cuadro */
+  padding:80px;               /* altura del cuadro */
+  min-height:72px;            /* altura mínima */
+  font-size:40px;             /* tamaño del texto */
+  line-height:2;              /* espacio vertical del texto */
+  border-radius:14px;         /* esquinas redondeadas */
+  border:2px solid #d1d5db;   /* borde */
 }
 
 
@@ -125,6 +129,7 @@ li.item{
   display:none;
 
 }
+
 
 
 
