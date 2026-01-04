@@ -51,7 +51,7 @@ label{
 }
 input, select{
   width:100%;                 /* ancho del cuadro */
-  padding:80px;               /* altura del cuadro */
+  padding:60px;               /* altura del cuadro */
   min-height:72px;            /* altura mínima */
   font-size:40px;             /* tamaño del texto */
   line-height:2;              /* espacio vertical del texto */
@@ -134,6 +134,7 @@ li.item{
   display:none;
 
 }
+
 
 
 
